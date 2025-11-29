@@ -12,11 +12,13 @@ pub enum VariableType{
 pub struct Variable{
 	is_pointer: bool,
 	is_global: bool,
-	is_static: bool, 
+	is_static: bool,
+	init: bool,
 	var_type: VariableType,
+	name: String
 }
 
-pub enum TerminalChars{
+pub enum TerminalChar{
 	ParenOpen,
 	ParenClose,
 	BracketOpen,
