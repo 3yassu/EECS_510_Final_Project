@@ -1,15 +1,18 @@
+//turing_machine/tape.rs
 use std::ptr::NonNull;
 use core::marker::PhantomData;
 use super::terminals::*;
+
 pub struct TuringCell{
-    entry: TerminalChar,
-    left: CellPtr,
-    right: CellPtr,
+    pub(super) entry: TerminalChar,
+    pub(super) left: CellPtr,
+    pub(super) right: CellPtr,
 }
 impl TuringCell{
     fn new(entry: TerminalChar) -> Self{
         Self{entry, left: None, right: None}
     }
+    
 }
 pub type CellPtr = Option<NonNull<TuringCell>>;
 
