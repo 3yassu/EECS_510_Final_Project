@@ -14,7 +14,7 @@ impl CTuringMachine{
 	fn read_char(&mut self){
 		self.cur_state.read_char(&mut self.cur)
 	}
-	pub fn run(&mut self){
+	pub fn run(&mut self) -> bool {
 		while(self.cur_state != State::A) && (self.cur_state != State::F){
 			self.read_char();
 		}
