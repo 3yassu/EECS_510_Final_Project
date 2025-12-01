@@ -2,8 +2,7 @@ use std::fs::File;
 use std::io;
 use std::path::Path;
 mod turing_machine;
-use crate::turing_machine::tape::Tape;
-use crate::turing_machine::machine::CTuringMachine
+use crate::turing_machine::{tape::Tape, machine::CTuringMachine};
 
 fn main() {
 	//get file input (either .c or .txt file)
@@ -24,12 +23,12 @@ fn main() {
     match file.read_to_string(&mut s) {
         Err(why) => panic!("couldn't read {}: {}", display, why),
         Ok(_) => {
-			let my_tape = Tape(); //create tape by sending to linked list
+			let my_tape = Tape::new(); //create tape by sending to linked list
 			for c in s.chars(){
 				my_tape.push_back(c);
 			}	
-			let tm = CTuringMachine(my_tape);  //send tape to TM function
-			let result = tm.run()
+			let tm = CTuringMachine::new(my_tape);  //send tape to TM function
+			let result = tm.run();
 			if result{
 				println!("accepted");
 			} else {
