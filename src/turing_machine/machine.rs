@@ -18,10 +18,6 @@ impl CTuringMachine{
 		while(self.cur_state != State::A) && (self.cur_state != State::F){
 			self.read_char();
 		}
-		if self.cur_state == State::A{
-			return true;
-		} else {
-			return false;
-		}
+		self.cur_state == State::A
 	}
 }

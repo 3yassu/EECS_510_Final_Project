@@ -30,38 +30,38 @@ impl State{
 					TerminalChar::DoubleQuote => (*self, w_char, dir) = (State::Qd, TerminalChar::Char(' '), Direction::Right),
 					TerminalChar::BracketClose => (*self, w_char, dir) = (State::B, TerminalChar::Char(' '), Direction::Left),
 					TerminalChar::ParenClose => (*self, w_char, dir) = (State::P, TerminalChar::Char(' '), Direction::Left),
-					_ => (*self, w_char, dir) = (State::S, r_char, Direction::Right),
+					_ => (w_char, dir) = (r_char, Direction::Right),
 				}
 			State::P =>
 				match &r_char{
 					TerminalChar::ParenOpen => (*self, w_char, dir) = (State::S, TerminalChar::Char(' '), Direction::Right),
 					TerminalChar::BOF => (*self, w_char, dir) = (State::F, r_char, Direction::Right),
-					_ => (*self, w_char, dir) = (State::P, r_char, Direction::Left),
+					_ => (w_char, dir) = (r_char, Direction::Left),
 				}
 			State::B =>
 				match &r_char{
 					TerminalChar::BracketOpen => (*self, w_char, dir) = (State::S, TerminalChar::Char(' '), Direction::Right),
 					TerminalChar::BOF => (*self, w_char, dir) = (State::F, r_char, Direction::Right),
-					_ => (*self, w_char, dir) = (State::P, r_char, Direction::Left),
+					_ => (w_char, dir) = (r_char, Direction::Left),
 				}
 			State::Qs =>
 				match &r_char{
 					TerminalChar::SingleQuote => (*self, w_char, dir) = (State::S, TerminalChar::Char(' '), Direction::Right),
-					TerminalChar::BOF => (*self, w_char, dir) = (State::F, r_char, Direction::Right),
-					_ => (*self, w_char, dir) = (State::Qs, TerminalChar::Char(' '), Direction::Right),
+					TerminalChar::EOF => (*self, w_char, dir) = (State::F, r_char, Direction::Left),
+					_ => (w_char, dir) = (TerminalChar::Char(' '), Direction::Right),
 				}
 			State::Qd =>
 				match &r_char{
 					TerminalChar::DoubleQuote => (*self, w_char, dir) = (State::S, TerminalChar::Char(' '), Direction::Right),
-					TerminalChar::BOF => (*self, w_char, dir) = (State::F, r_char, Direction::Right),
-					_ => (*self, w_char, dir) = (State::Qd, TerminalChar::Char(' '), Direction::Right),
+					TerminalChar::EOF => (*self, w_char, dir) = (State::F, r_char, Direction::Left),
+					_ => (w_char, dir) = (TerminalChar::Char(' '), Direction::Right),
 				}
 			State::E =>
 				match &r_char{
 					TerminalChar::ParenOpen => (*self, w_char, dir) = (State::F, r_char, Direction::Left),
 					TerminalChar::BracketOpen => (*self, w_char, dir) = (State::F, r_char, Direction::Left),
 					TerminalChar::BOF => (*self, w_char, dir) = (State::A, TerminalChar::BOF, Direction::Right),
-					_ => (*self, w_char, dir) = (State::Qd, r_char, Direction::Left),
+					_ => (w_char, dir) = (r_char, Direction::Left),
 				}
 			//State::A => return true,
 			//State::F => return false,

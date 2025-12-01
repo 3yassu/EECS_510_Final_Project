@@ -11,8 +11,8 @@ fn main() {
     let mut user_input = String::new(); 
     io::stdin()
         .read_line(&mut user_input) 
-        .expect("Failed to read line");	
-	let path = Path::new(&user_input);
+        .expect("Failed to read line");
+	let path = Path::new(user_input.trim());
     let display = path.display();
     // Open the path in read-only mode, returns `io::Result<File>`
     let mut file = match File::open(&path) {
@@ -39,7 +39,7 @@ fn main() {
 				}
 			}
 			my_tape.push_back(TerminalChar::EOF);
-			let mut atm = CTuringMachine::new(my_tape);  //send tape to TM function
+			let mut tm = CTuringMachine::new(my_tape);  //send tape to TM function
 			let result = tm.run();
 			if result{
 				println!("accepted");
