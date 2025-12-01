@@ -2,7 +2,7 @@
 use super::tape::{Tape, CellPtr};
 use super::states::State;
 
-struct CTuringMachine{
+pub struct CTuringMachine{
 	tape: Tape,
 	cur: CellPtr,
 	cur_state: State
@@ -15,8 +15,13 @@ impl CTuringMachine{
 		self.cur_state.read_char(&mut self.cur)
 	}
 	pub fn run(&mut self){
-		while(self.cur_state != State::H){
+		while(self.cur_state != State::A) && (self.cur_state != State::F){
 			self.read_char();
+		}
+		if self.cur_state == State::A{
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
