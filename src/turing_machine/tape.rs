@@ -26,7 +26,7 @@ impl Tape{
     pub fn new() -> Self{
         Self{front: None, back: None, len: 0, _boo: PhantomData}
     }
-    pub fn push_front(&mut self, entry: TerminalChar){
+    /*pub fn push_front(&mut self, entry: TerminalChar){
         unsafe{
             let node = NonNull::new_unchecked(Box::into_raw(Box::new(TuringCell::new(entry))));
             match &mut self.front{
@@ -39,7 +39,7 @@ impl Tape{
             self.front = Some(node);
             self.len += 1;
         }
-    }
+    }*/
     pub fn push_back(&mut self, entry: TerminalChar){
         unsafe{
             let node = NonNull::new_unchecked(Box::into_raw(Box::new(TuringCell::new(entry))));
@@ -72,7 +72,7 @@ impl Tape{
     pub fn peek_front_node(&self) -> CellPtr{
 		self.front.as_ref().map(|cell| cell.clone())
     }
-    pub fn pop_back(&mut self) -> Option<TerminalChar>{
+    /*pub fn pop_back(&mut self) -> Option<TerminalChar>{
         unsafe{
             self.back.map( |node| {
                 let boxed = Box::from_raw(node.as_ptr());
@@ -89,7 +89,7 @@ impl Tape{
     }
     pub fn clear(&mut self){
         while self.pop_front().is_some(){}
-    }
+    }*/
 }
 impl Drop for Tape {
     fn drop(&mut self){

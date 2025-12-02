@@ -1,6 +1,6 @@
 //turing_machine/states.rs
 use super::terminals::TerminalChar;
-use super::tape::{TuringCell, CellPtr};
+use super::tape::{CellPtr};
 pub enum Direction{
 	Left,
 	Right
