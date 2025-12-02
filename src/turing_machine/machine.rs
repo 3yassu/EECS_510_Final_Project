@@ -1,7 +1,7 @@
 //turing_machine/machine.rs
 use super::tape::{Tape, CellPtr};
 use super::states::State;
-
+#[allow(unused)]
 pub struct CTuringMachine{
 	tape: Tape,
 	cur: CellPtr,

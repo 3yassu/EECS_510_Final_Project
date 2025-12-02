@@ -1,6 +1,6 @@
 //turing_machine/terminals.rs
 use std::mem;
-
+#[allow(unused)]
 pub enum TerminalChar{
 	ParenOpen,
 	ParenClose,
