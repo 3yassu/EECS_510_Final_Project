@@ -1,7 +1,9 @@
+//Imports for File IO
 use std::fs::File;
 use std::io;
 use std::path::Path;
 use std::io::Read;
+//File imports to run the Turing Machine
 mod turing_machine;
 use crate::turing_machine::{tape::Tape, machine::CTuringMachine, terminals::TerminalChar};
 
