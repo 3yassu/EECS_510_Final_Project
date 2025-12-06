@@ -1,10 +1,13 @@
 //turing_machine/states.rs
+//Bring TerminalChar and Tape Location for state transitions 
 use super::terminals::TerminalChar;
 use super::tape::{CellPtr};
+//enum to differentiate where the state is going
 pub enum Direction{
 	Left,
 	Right
 }
+//State enum
 #[derive(PartialEq)]
 pub enum State{
 	S,
@@ -17,11 +20,13 @@ pub enum State{
 	F,
 }
 impl State{
+	//State transition, Changes what self is, writes the w_char into CellPtr's location, and moves the required direction
 	pub fn read_char(&mut self, cellptr: &mut CellPtr){
 		let ptr = cellptr.unwrap();
 		let r_char = unsafe{(*ptr.as_ptr()).entry.take()};
 		let w_char: TerminalChar;
 		let dir: Direction; 
+		//Set values and change self
 		match self{
 			State::S =>
 				match &r_char{
@@ -67,7 +72,9 @@ impl State{
 			//State::F => return false,
 			_ => panic!("This message should not appear, should it? Tell me if you see it."),
 		}
+		//Write w_char
 		unsafe{(*ptr.as_ptr()).entry = w_char};
+		//Move direction
 		match dir{
 			Direction::Left => *cellptr = unsafe{(*ptr.as_ptr()).left},
 			Direction::Right => *cellptr = unsafe{(*ptr.as_ptr()).right},
